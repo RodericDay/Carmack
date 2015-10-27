@@ -1,7 +1,5 @@
 import bottle
 
-not_implemented_json = { "success": False, "error": "Not implemented" }
-
 data = []
 
 @bottle.post('/autos')
@@ -13,16 +11,18 @@ def create_entry():
 def query_all():
     return { "success": True, "data": data }
 
-@bottle.get('/autos/<auto_id>')
+@bottle.get('/autos/<auto_id:int>')
 def retrieve_entry(auto_id):
-    return not_implemented_json
+    return { "success": True, "data": data[auto_id] }
 
-@bottle.put('/autos/<auto_id>')
+@bottle.put('/autos/<auto_id:int>')
 def update_entry(auto_id):
-    return not_implemented_json
+    data[auto_id].update(dict(bottle.request.forms))
+    return { "success": True, "data": data[auto_id] }
 
-@bottle.delete('/autos/<auto_id>')
+@bottle.delete('/autos/<auto_id:int>')
 def delete_entry(auto_id):
-    return not_implemented_json
+    del data[auto_id]
+    return { "success": True }
 
 bottle.run(host='localhost', port=8080, quiet=True)

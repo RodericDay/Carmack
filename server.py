@@ -2,13 +2,15 @@ import bottle
 
 not_implemented_json = { "success": False, "error": "Not implemented" }
 
+data = []
+
 @bottle.post('/autos')
 def create_entry():
     return not_implemented_json
 
 @bottle.get('/autos')
 def query_all():
-    return not_implemented_json
+    return { "success": True, "data": data }
 
 @bottle.get('/autos/<auto_id>')
 def retrieve_entry(auto_id):

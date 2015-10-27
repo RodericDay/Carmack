@@ -4,7 +4,14 @@ function submitForm() {
         url: '/autos',
         type: 'POST',
         data: $("#mainForm").serialize(),
-        success: function() { form.reset(); updateCollection(); }
+        success: function(response) {
+            if (response.success) {
+                form.reset();
+                updateCollection();
+            } else {
+                alert(response.error);
+            }
+        }
     });
     return false
 }

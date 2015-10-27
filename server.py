@@ -1,4 +1,5 @@
 import bottle
+from peewee import IntegrityError
 from models import Vehicle
 
 def parse(obj):
@@ -15,8 +16,11 @@ def query_all():
 
 @bottle.post('/autos')
 def create_entry():
-    data = parse(Vehicle.create(**bottle.request.forms))
-    return { "success": True, "data": data }
+    try:
+        data = parse(Vehicle.create(**bottle.request.forms))
+        return { "success": True, "data": data }
+    except IntegrityError as error:
+        return { "success": False, "error": "Server rejected submission." }
 
 @bottle.get('/autos/<auto_id:int>')
 def retrieve_entry(auto_id):

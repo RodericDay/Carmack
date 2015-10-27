@@ -25,3 +25,8 @@ def test_integration():
     resp = requests.get("http://localhost:8080/autos").json()
     assert resp['success'] and len(resp['data']) == 0
 
+def test_inadequate():
+    resp = requests.post("http://localhost:8080/autos", data={'a': 'b'}).json()
+    assert not resp['success'] and resp['error']
+
+

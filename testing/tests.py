@@ -30,7 +30,7 @@ def test_inadequate():
     assert not resp['success'] and resp['error']
 
 def test_populate_mock_data():
-    with open('mock_data.json') as fp:
+    with open('testing/mock_data.json') as fp:
         data = json.load(fp)
 
     for entry in data:

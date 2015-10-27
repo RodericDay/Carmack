@@ -12,14 +12,15 @@ def test_integration():
     resp = requests.post("http://localhost:8080/autos", data=data).json()
     assert resp['success'] and resp['data']['owner'] == "John Carmack"
 
-    resp = requests.get("http://localhost:8080/autos/0").json()
+    auto_id = str(resp['data']['id'])
+    resp = requests.get("http://localhost:8080/autos/"+auto_id).json()
     assert resp['success'] and resp['data']['description'] == 'red'
 
     data = {"owner": "Dennis 'Thresh' Fong"}
-    resp = requests.put("http://localhost:8080/autos/0", data=data).json()
+    resp = requests.put("http://localhost:8080/autos/"+auto_id, data=data).json()
     assert resp['success'] and resp['data']['owner'] == "Dennis 'Thresh' Fong"
 
-    resp = requests.delete("http://localhost:8080/autos/0").json()
+    resp = requests.delete("http://localhost:8080/autos/"+auto_id).json()
     assert resp['success']
 
     resp = requests.get("http://localhost:8080/autos").json()

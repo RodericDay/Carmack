@@ -29,12 +29,12 @@ def create_entry():
 
 @bottle.get('/autos/<auto_id:int>')
 def retrieve_entry(auto_id):
-    data = parse(Vehicle.select()[auto_id])
+    data = parse(Vehicle.get(Vehicle.id == auto_id))
     return { "success": True, "data": data }
 
 @bottle.put('/autos/<auto_id:int>')
 def update_entry(auto_id):
-    item = Vehicle.select()[auto_id]
+    item = Vehicle.get(Vehicle.id == auto_id)
     for key, value in bottle.request.forms.items():
         setattr(item, key, value)
     item.save()
@@ -42,7 +42,7 @@ def update_entry(auto_id):
 
 @bottle.delete('/autos/<auto_id:int>')
 def delete_entry(auto_id):
-    Vehicle.select()[auto_id].delete_instance()
+    Vehicle.get(Vehicle.id == auto_id).delete_instance()
     return { "success": True }
 
 @bottle.route('/')

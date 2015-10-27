@@ -47,7 +47,7 @@ def delete_entry(auto_id):
 
 @bottle.route('/')
 def serve_html():
-    return bottle.template("client.html")
+    return bottle.template("static/client.html")
 
 @bottle.route('/static/<filename>')
 def serve_static(filename):

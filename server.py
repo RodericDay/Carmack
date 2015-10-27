@@ -6,7 +6,10 @@ def parse(obj):
     ''' turns object from peewee model to dict '''
     return {
         "brand": obj.brand,
+        "cylinder": obj.cylinder,
         "description": obj.description,
+        "year": obj.year,
+        "owner": obj.owner
     }
 
 @bottle.get('/autos')
@@ -17,10 +20,11 @@ def query_all():
 @bottle.post('/autos')
 def create_entry():
     try:
+        assert 1900 < int(bottle.request.forms['year']) < 2050
         data = parse(Vehicle.create(**bottle.request.forms))
         return { "success": True, "data": data }
-    except IntegrityError as error:
-        return { "success": False, "error": "Server rejected submission." }
+    except (IntegrityError, ValueError, KeyError, AssertionError) as error:
+        return { "success": False, "error": "Server rejected input." }
 
 @bottle.get('/autos/<auto_id:int>')
 def retrieve_entry(auto_id):

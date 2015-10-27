@@ -8,11 +8,11 @@ class BaseModel(Model):
         database = db
 
 class Vehicle(BaseModel):
-    description = CharField()
-    cylinder = IntegerField()
-    brand = CharField()
+    description = CharField(null=False)
+    cylinder = IntegerField(null=False)
+    brand = CharField(null=False)
     year = DateField(formats="%Y")
-    owner = CharField()
+    owner = CharField(null=False)
 
 db.connect()
 db.create_tables([Vehicle])

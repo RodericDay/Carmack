@@ -36,8 +36,11 @@ function updateCollection() {
             for (key in entry) {
                 copy.querySelector('.'+key).innerHTML = entry[key];
             }
+            copy.querySelector(".buttonEdit").onclick = function() {
+                console.log(copy);
+            }
             copy.querySelector(".buttonDelete").onclick = function() {
-                promptDelete(copy.id)
+                promptDelete(copy.id);
             };
             collectionView.appendChild(copy);
         });

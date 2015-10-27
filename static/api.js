@@ -7,9 +7,12 @@ function submitForm() {
 
 function updateCollection() {
     $.getJSON('/autos', null, function(response) {
-        collectionView.innerHTML = '';
         response.data.forEach(function(entry){
-            collectionView.innerHTML += JSON.stringify(entry) + "<br>";
+            var copy = document.querySelector("#entryTemplate").cloneNode(true);
+            for (key in entry) {
+                document.querySelector('.'+key).innerHTML = entry[key];
+            }
+            collectionView.appendChild(copy);
         });
     });
 }

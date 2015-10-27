@@ -1,0 +1,37 @@
+[
+{
+    "description": "328GTS turbo (gave it away for 1st place at Quakecon '97)",
+    "cylinder": 12,
+    "brand": "Ferrari",
+    "year": 1990,
+    "owner": "Dennis 'Thresh' Fong"
+},
+{
+    "description": "Testarossa Twin turbo",
+    "cylinder": 12,
+    "brand": "Ferrari",
+    "year": 1990,
+    "owner": "John Carmack"
+},
+{
+    "description": "F40",
+    "cylinder": 12,
+    "brand": "Ferrari",
+    "year": 1990,
+    "owner": "John Carmack"
+},
+{
+    "description": "F50 Twin Turbo",
+    "cylinder": 12,
+    "brand": "Ferrari",
+    "year": 1990,
+    "owner": "John Carmack"
+},
+{
+    "description": "Norwood 288 GTO carbon fiber",
+    "cylinder": 12,
+    "brand": "Ferrari",
+    "year": 1990,
+    "owner": "John Carmack"
+}
+]

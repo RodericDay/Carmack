@@ -4,7 +4,11 @@ def test_integration():
     resp = requests.get("http://localhost:8080/autos").json()
     assert resp['success'] and len(resp['data']) == 0
 
-    data = {"brand": "Ferrari", "description": "red"}
+    data = {"brand": "Ferrari",
+            "cylinder": 12,
+            "description": "red",
+            "year": 1993,
+            "owner": "John Carmack"}
     resp = requests.post("http://localhost:8080/autos", data=data).json()
     assert resp['success'] and resp['data']['brand'] == "Ferrari"
 

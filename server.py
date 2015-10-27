@@ -38,4 +38,8 @@ def delete_entry(auto_id):
     Vehicle.select()[auto_id].delete_instance()
     return { "success": True }
 
-bottle.run(host='localhost', port=8080, quiet=True)
+@bottle.route('/')
+def serve_html():
+    return bottle.template("client.html")
+
+bottle.run(host='localhost', port=8080, quiet=True, debug=True)

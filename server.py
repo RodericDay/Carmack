@@ -5,6 +5,7 @@ from models import Vehicle
 def parse(obj):
     ''' turns object from peewee model to dict '''
     return {
+        "id": obj.id,
         "brand": obj.brand,
         "cylinder": obj.cylinder,
         "description": obj.description,

@@ -29,12 +29,14 @@ function promptDelete(entryId) {
 function updateCollection() {
     collectionView.innerHTML = '';
     $.getJSON('/autos', null, function(response) {
-        var i = 0; // add internal keys to avoid this mess
         response.data.forEach(function(entry){
             var copy = document.querySelector("#entryTemplate").cloneNode(true);
-            copy.id = i++;
+            copy.id = entry.id;
             for (key in entry) {
                 copy.querySelector('.'+key).innerHTML = entry[key];
+            }
+            copy.querySelector(".buttonView").onclick = function() {
+                console.log(copy);
             }
             copy.querySelector(".buttonEdit").onclick = function() {
                 console.log(copy);

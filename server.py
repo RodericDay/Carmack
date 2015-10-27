@@ -6,7 +6,8 @@ data = []
 
 @bottle.post('/autos')
 def create_entry():
-    return not_implemented_json
+    data.append(dict(bottle.request.forms))
+    return { "success": True, "data": data }
 
 @bottle.get('/autos')
 def query_all():

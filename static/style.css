@@ -14,3 +14,9 @@
     border: none;
     background-color: transparent;
 }
+#mainForm > label {
+    margin-right: 10px;
+    text-align: right;
+    display: inline-block;
+    width: 100px;
+}

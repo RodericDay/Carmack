@@ -36,8 +36,6 @@ def retrieve_entry(auto_id):
 def update_entry(auto_id):
     item = Vehicle.select()[auto_id]
     for key, value in bottle.request.forms.items():
-        # peewee's update command is behaving strangely,
-        # so update fields manually
         setattr(item, key, value)
     item.save()
     return { "success": True, "data": parse(item) }

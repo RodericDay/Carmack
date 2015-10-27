@@ -36,3 +36,6 @@ def test_populate_mock_data():
     for entry in data:
         resp = requests.post("http://localhost:8080/autos", data=entry).json()
         assert resp['success']
+
+    resp = requests.get("http://localhost:8080/autos").json()
+    assert resp['success'] and len(resp['data']) == len(data)

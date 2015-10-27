@@ -7,8 +7,8 @@ class BaseModel(Model):
         database = db
 
 class Vehicle(BaseModel):
-    brand = CharField()
     description = CharField()
+    brand = CharField()
 
 db.connect()
 db.create_tables([Vehicle])

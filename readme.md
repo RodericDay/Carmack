@@ -1,7 +1,7 @@
 Carmack
 =======
 
-`Carmack` is a CRUD app for a putative car collector (ironic because, although John Carmack collected Ferraris, he was more likely to be writing super low level `C` graphics).
+`Carmack` is a CRUD app for a hypothetical car collector (ironic because, although John Carmack collected Ferraris, he was more likely to be writing super low level `C` graphics).
 
 The client-side (`HTML/CSS/JavaScript`) is completely static and divorced from the back-end (`Bottle/Peewee/Sqlite`). The back-end is currently meant to be run locally. They communicate exclusively via a REST api.
 

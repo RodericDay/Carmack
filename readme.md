@@ -21,10 +21,12 @@ The API is inspired by [Parse.com](https://parse.com/docs/rest/guide)'s REST API
 
 ## Installation
 
-1) Download source
-2) Execute `pip install -r requirements.txt`
-3) Run `python server.py`
-4) Interact via HTTP directly, run tests, or access `localhost:8080` for a barebones demo
+`setup.py` script would be ideal, but such a barebones app isn't going on PyPI, so it doesn't benefit that much from that kind of configuration. It would perhaps end on Heroku one day, in which case this kind of script is more applicable.
+
+1. Download source
+2. Execute `pip install -r requirements.txt`
+3. Run `python server.py`
+4. Interact via HTTP directly, run tests, or access `localhost:8080` for a barebones demo
 
 ## Pending/Notes
 

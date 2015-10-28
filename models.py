@@ -1,5 +1,5 @@
 from peewee import SqliteDatabase, Model, \
-    CharField, IntegerField, DateField
+    CharField, IntegerField, DateField, BlobField
 
 db = SqliteDatabase(':memory:', threadlocals=True)
 
@@ -13,6 +13,7 @@ class Vehicle(BaseModel):
     brand = CharField(null=False)
     year = DateField(formats="%Y")
     owner = CharField(null=False)
+    photo = BlobField(null=True)
 
 db.connect()
 db.create_tables([Vehicle])

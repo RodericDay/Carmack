@@ -22,8 +22,8 @@ def query_all():
 def create_entry():
     try:
         assert 1900 < int(bottle.request.forms['year']) < 2050
-        data = parse(Vehicle.create(**bottle.request.forms))
-        return { "success": True, "data": data }
+        item = Vehicle.create(**bottle.request.forms)
+        return { "success": True, "data": parse(item) }
     except (IntegrityError, ValueError, KeyError, AssertionError) as error:
         return { "success": False, "error": "Server rejected input." }
 

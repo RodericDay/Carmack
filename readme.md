@@ -13,8 +13,9 @@ The API is inspired by [Parse.com](https://parse.com/docs/rest/guide)'s REST API
 
 | URL | HTTP Verb | Functionality |
 | --- | --------- | --------------|
-| /autos | GET | Queries
-| /autos | POST | Creating Objects
-| /autos/<auto_id:int> | GET | Retrieving Objects
-| /autos/<auto_id:int> | PUT | Updating Objects
-| /autos/<auto_id:int> | DELETE | Deleting Objects
+| `/autos` | `GET` | Queries
+| `/autos` | `POST` | Creating Objects
+| `/autos/<auto_id:int>` | `GET` | Retrieving Objects
+| `/autos/<auto_id:int>` | `PUT` | Updating Objects
+| `/autos/<auto_id:int>` | `DELETE` | Deleting Objects
+

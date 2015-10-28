@@ -44,3 +44,10 @@ def test_store_photo():
 
     resp = requests.put("http://localhost:8080/autos/1", files=files).json()
     assert resp['success'] and resp['data']['photo']
+
+def test_doesnt_validate():
+    resp = requests.put("http://localhost:8080/autos/1", data={'year': 1800}).json()
+    assert not resp['success']
+
+def test_not_found():
+    resp = requests.put("http://localhost:8080/autos/100", data={'year': 1999}).json()

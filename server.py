@@ -1,7 +1,11 @@
 import bottle
-from peewee import IntegrityError
+from peewee import IntegrityError, DoesNotExist
 from models import Vehicle
 import base64
+
+#
+# UTIL
+#
 
 def parse(obj):
     ''' turns object from peewee model to dict '''
@@ -19,6 +23,17 @@ def parse(obj):
         data['photo'] = "data:image/png;base64,"+base64.b64encode(obj.photo).decode()
     return data
 
+def validate(request_forms):
+    try:
+       if 'year' in request_forms:
+            assert 1900 < int(request_forms['year']) < 2050
+    except (ValueError, KeyError, AssertionError):
+        raise IntegrityError
+
+#
+# API
+#
+
 @bottle.get('/autos')
 def query_all():
     data = [parse(v) for v in Vehicle.select()]
@@ -27,11 +42,11 @@ def query_all():
 @bottle.post('/autos')
 def create_entry():
     try:
-        assert 1900 < int(bottle.request.forms['year']) < 2050
+        validate(bottle.request.forms)
         item = Vehicle.create(**bottle.request.forms)
         return { "success": True, "data": parse(item) }
-    except (IntegrityError, ValueError, KeyError, AssertionError) as error:
-        return { "success": False, "error": "Server rejected input." }
+    except IntegrityError as error:
+        return { "success": False, "error": "Creation rejected." }
 
 @bottle.get('/autos/<auto_id:int>')
 def retrieve_entry(auto_id):
@@ -40,7 +55,16 @@ def retrieve_entry(auto_id):
 
 @bottle.put('/autos/<auto_id:int>')
 def update_entry(auto_id):
-    item = Vehicle.get(Vehicle.id == auto_id)
+    try:
+        validate(bottle.request.forms)
+    except IntegrityError:
+        return { "success": False, "error": "Update rejected." }
+
+    try:
+        item = Vehicle.get(Vehicle.id == auto_id)
+    except DoesNotExist:
+        return { "success": False, "error": "Item not found." }
+
     for key, value in bottle.request.forms.items():
         setattr(item, key, value)
     photo = bottle.request.files.get('photo')
@@ -53,6 +77,10 @@ def update_entry(auto_id):
 def delete_entry(auto_id):
     Vehicle.get(Vehicle.id == auto_id).delete_instance()
     return { "success": True }
+
+#
+# STATIC
+#
 
 @bottle.route('/')
 def serve_html():

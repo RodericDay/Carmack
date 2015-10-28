@@ -20,3 +20,7 @@
     display: inline-block;
     width: 100px;
 }
+.photo {
+    max-height: 300px;
+    max-width: 300px;
+}

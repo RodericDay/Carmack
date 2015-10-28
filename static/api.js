@@ -1,12 +1,11 @@
 function submitForm() {
-    var form = this;
     $.ajax({
         url: '/autos',
         type: 'POST',
-        data: $("#mainForm").serialize(),
+        data: $(mainForm).serialize(),
         success: function(response) {
             if (response.success) {
-                form.reset();
+                mainForm.reset();
                 updateCollection();
             } else {
                 alert(response.error);
@@ -14,6 +13,16 @@ function submitForm() {
         }
     });
     return false
+}
+
+function populateForm(entryId) {
+    $.getJSON('/autos/'+entryId, null, function(response) {
+        if (response.success) {
+            for (key in response.data) {
+                mainForm[key].value = response.data[key];
+            }
+        }
+    });
 }
 
 function promptDelete(entryId) {
@@ -36,6 +45,7 @@ function updateCollection() {
                 copy.querySelector('.'+key).innerHTML = entry[key];
             }
             copy.querySelector(".buttonInfo").onclick = function() {
+                populateForm(copy.id);
             }
             copy.querySelector(".buttonDelete").onclick = function() {
                 promptDelete(copy.id);

@@ -26,7 +26,8 @@ The API is inspired by [Parse.com](https://parse.com/docs/rest/guide)'s REST API
 3) Run `python server.py`
 4) Interact via HTTP directly, run tests, or access `localhost:8080` for a barebones demo
 
-## Pending
+## Pending/Notes
 
 - Base64 encoding of uploaded images for pure JSON input? (33% size penalty)
 - Current script execution is just `python server.py`. Runner script should allow extra functionality (ie: database selection)
+- Makefile used (abused?) to offer a very easy REPL test cycle in Sublime Text 3 without incurring a lot of overhead in terms of configuration files. May break on Windows.

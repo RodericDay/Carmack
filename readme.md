@@ -19,6 +19,13 @@ The API is inspired by [Parse.com](https://parse.com/docs/rest/guide)'s REST API
 | `/autos/<auto_id:int>` | `PUT` | Updating Objects
 | `/autos/<auto_id:int>` | `DELETE` | Deleting Objects
 
+## Installation
+
+1) Download source
+2) Execute `pip install -r requirements.txt`
+3) Run `python server.py`
+4) Interact via HTTP directly, run tests, or access `localhost:8080` for a barebones demo
+
 ## Pending
 
 - Base64 encoding of uploaded images for pure JSON input? (33% size penalty)

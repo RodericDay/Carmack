@@ -28,6 +28,16 @@ The API is inspired by [Parse.com](https://parse.com/docs/rest/guide)'s REST API
 3. Run `python server.py`
 4. Interact via HTTP directly, run tests, or access `localhost:8080` for a barebones demo
 
+## Configuration
+
+By default, `Carmack` runs in memory. It's just cleaner. However, it is very very easy to make it persistent (although the tests need to be adapted to this end...):
+
+On `models.py`:
+
+    db = SqliteDatabase(':memory:', threadlocals=True)
+
+Changing `':memory:'` to something else, like `'local.db'`, automatically makes the app persistent.
+
 ## Pending/Notes
 
 - Base64 encoding of uploaded images for pure JSON input? (33% size penalty)

@@ -19,7 +19,9 @@ function populateForm(entryId) {
     $.getJSON('/autos/'+entryId, null, function(response) {
         if (response.success) {
             for (key in response.data) {
-                mainForm[key].value = response.data[key];
+                if (key!=='photo') {
+                    mainForm[key].value = response.data[key];
+                }
             }
         }
     });
@@ -42,7 +44,11 @@ function updateCollection() {
             var copy = document.querySelector("#entryTemplate").cloneNode(true);
             copy.id = entry.id;
             for (key in entry) {
-                copy.querySelector('.'+key).innerHTML = entry[key];
+                if (key=='photo') {
+                    copy.querySelector('.'+key).setAttribute("src", entry[key]);
+                } else {
+                    copy.querySelector('.'+key).innerHTML = entry[key];
+                }
             }
             copy.querySelector(".buttonInfo").onclick = function() {
                 populateForm(copy.id);

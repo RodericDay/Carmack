@@ -1,17 +1,23 @@
 import bottle
 from peewee import IntegrityError
 from models import Vehicle
+import base64
 
 def parse(obj):
     ''' turns object from peewee model to dict '''
-    return {
+    data = {
         "id": obj.id,
         "brand": obj.brand,
         "cylinder": obj.cylinder,
         "description": obj.description,
         "year": obj.year,
-        "owner": obj.owner
+        "owner": obj.owner,
     }
+    if obj.photo:
+        # ideally we would have a cdn and this would be a pointer to that cdn,
+        # handled client-side. however, base64 will do for now
+        data['photo'] = "data:image/png;base64,"+base64.b64encode(obj.photo).decode()
+    return data
 
 @bottle.get('/autos')
 def query_all():
@@ -37,6 +43,9 @@ def update_entry(auto_id):
     item = Vehicle.get(Vehicle.id == auto_id)
     for key, value in bottle.request.forms.items():
         setattr(item, key, value)
+    photo = bottle.request.files.get('photo')
+    if photo:
+        item.photo = photo.file.read()
     item.save()
     return { "success": True, "data": parse(item) }
 

@@ -37,3 +37,10 @@ def test_populate_mock_data():
 
     resp = requests.get("http://localhost:8080/autos").json()
     assert resp['success'] and len(resp['data']) == len(data)
+
+def test_store_photo():
+    with open('testing/carmack.jpg', 'rb') as fp:
+        files = {'photo': fp.read()}
+
+    resp = requests.put("http://localhost:8080/autos/1", files=files).json()
+    assert resp['success'] and resp['data']['photo']

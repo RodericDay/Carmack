@@ -19,3 +19,7 @@ The API is inspired by [Parse.com](https://parse.com/docs/rest/guide)'s REST API
 | `/autos/<auto_id:int>` | `PUT` | Updating Objects
 | `/autos/<auto_id:int>` | `DELETE` | Deleting Objects
 
+## Pending
+
+- Base64 encoding of uploaded images for pure JSON input? (33% size penalty)
+- Current script execution is just `python server.py`. Runner script should allow extra functionality (ie: database selection)

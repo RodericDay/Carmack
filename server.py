@@ -90,4 +90,12 @@ def serve_html():
 def serve_static(filename):
     return bottle.static_file(filename, root="static")
 
-bottle.run(host='localhost', port=8080, quiet=True, debug=True)
+#
+# EXECUTION
+#
+
+def run(debug=False, quiet=False):
+    bottle.run(host='localhost', port=8080, quiet=quiet, debug=debug)
+
+if __name__ == '__main__':
+    run(debug=True, quiet=True)
